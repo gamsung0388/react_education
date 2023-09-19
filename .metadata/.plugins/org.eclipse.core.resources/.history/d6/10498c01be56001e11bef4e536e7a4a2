@@ -1,0 +1,9 @@
+package com.example.boardTest;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+public class BoardEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType)
+}

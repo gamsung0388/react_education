@@ -1,0 +1,25 @@
+package com.example.boardTest;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "TB_BOARD")
+@DynamicInsert
+@DynamicUpdate
+public class BoardEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int IDX;
+	private String CONTENTS;
+	private String CREATED_AT;
+	private String CREATED_BY;
+	private String Title;
+	
+	
+}

@@ -1,0 +1,16 @@
+package com.example.boardTest;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+public class BoardEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int IDX;
+	private String CONTENTS;
+	private int CREATED_AT;
+	private int CREATED_BY;
+	
+	
+}

@@ -1,0 +1,12 @@
+package Board;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import db.BoardMapper;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@RestController
+public class BoardController {
+	private final BoardMapper boardMapper;
+}
