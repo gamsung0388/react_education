@@ -1,0 +1,21 @@
+package com.example.boardTest;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@Entity
+@Table(name = "Board")
+@DynamicInsert
+@DynamicUpdate
+public class BoardEntity {
+
+}
