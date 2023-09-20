@@ -63,7 +63,7 @@
         ) VALUES (
         #{title}
         , #{contents}
-        , #{createdBy}
+        , #{created_by}
         , NOW()
         )
     </insert>
