@@ -26,7 +26,7 @@ public class BoardEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idx;
 	private String contents;
-	private String created_at;
-	private String created_by;
+	private String createdman;
+	private String createdate;
 	private String title;
 }

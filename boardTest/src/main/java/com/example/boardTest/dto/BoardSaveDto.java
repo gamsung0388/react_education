@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class BoardSaveDto {
     private int idx;
     private String contents;
-	private String created_at;
-	private String created_by;
+	private String createdman;
+	private String createdate;
 	private String title;
 
     
@@ -26,8 +26,8 @@ public class BoardSaveDto {
                 .idx(idx)
                 .title(title)
                 .contents(contents)
-                .created_at(created_at)
-                .created_by(created_by)
+                .createdman(createdman)
+                .createdate(createdate)
                 .build();
     }
 }
