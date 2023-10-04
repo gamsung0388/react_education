@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.boardTest.db.BoardMapper">
+    <select id="getBoardList" parameterType="Map" resultType="BoardDto">
+        SELECT IDX
+        , TITLE
+        , CONTENTS
+        , CREATEDMAN
+        , CREATEDATE
+        FROM BOARD
+        WHERE 1=1
+
+        <if test="sk != '' || sk != null">
+            <if test="sk == 'title'">
+                AND TITLE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'contents'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'createdate'">
+                AND CREATEDATE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+        </if>
+        ORDER BY IDX DESC
+        LIMIT #{page}, #{size}
+    </select>
+
+    <select id="getBoardTotalCount" parameterType="Map" resultType="int">
+        SELECT COUNT(IDX)
+        FROM BOARD
+        WHERE 1=1
+        <if test="sk != '' || sk != null">
+            <if test="sk == 'title'">
+                AND TITLE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'contents'">
+                AND CONTENTS LIKE CONCAT('%', #{sv}, '%')
+            </if>
+            <if test="sk == 'createdate'">
+                AND CREATEDATE LIKE CONCAT('%', #{sv}, '%')
+            </if>
+        </if>
+    </select>
+
+    <select id="getBoardOne" parameterType="Long" resultType="BoardDto">
+        SELECT IDX
+        , TITLE
+        , CONTENTS
+        , CREATEDMAN
+        , CREATEDATE
+        FROM BOARD
+        WHERE IDX = #{idx}
+    </select>
+
+    <insert id="insertBoard" parameterType="BoardDto" keyProperty="idx" useGeneratedKeys="true">
+        INSERT BOARD
+        (
+        TITLE
+        , CONTENTS
+        , CREATEDMAN
+        , CREATEDATE
+        ) VALUES (
+        #{title}
+        , #{contents}
+        , #{createdman}
+        , NOW()
+        )
+    </insert>
+
+    <update id="updateBoard" parameterType="BoardDto">
+        UPDATE BOARD
+        SET TITLE = #{title}
+        , CONTENTS = #{contents}
+        WHERE IDX = #{idx}
+    </update>
+
+    <delete id="deleteBoard" parameterType="BoardDto">
+        DELETE FROM BOARD
+        WHERE IDX = #{idx}
+    </delete>
+</mapper>

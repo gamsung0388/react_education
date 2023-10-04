@@ -2,20 +2,22 @@ package com.example.boardTest.db;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.boardTest.dto.BoardDto;
+
 import java.util.HashMap;
 import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-	List<BoardEntity> getBoardList(HashMap<String, Object> paramMap);
+	List<BoardDto> getBoardList(HashMap<String, Object> paramMap);
 	
 	int getBoardTotalCount(HashMap<String, Object> paramMap);
 	
-	BoardEntity getBoardOne(Long idx);
+	BoardDto getBoardOne(Long idx);
 	
-	int insertBoard(BoardEntity entity);
+	int insertBoard(BoardDto boardDto);
 	
-	int updateBoard(BoardEntity entity);
+	int updateBoard(BoardDto boardDto);
 	
 	int deleteBoard(Long idx);
 }

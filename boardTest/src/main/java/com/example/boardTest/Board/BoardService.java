@@ -2,13 +2,12 @@ package com.example.boardTest.Board;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.example.boardTest.db.BoardEntity;
 import com.example.boardTest.db.BoardMapper;
-import com.example.boardTest.dto.BoardSaveDto;
-import com.example.boardTest.util.Header;
+import com.example.boardTest.dto.BoardDto;
 import com.example.boardTest.util.Pagination;
 import com.example.boardTest.util.Search;
 
@@ -17,9 +16,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class BoardService {
+	
     private final BoardMapper boardMapper;
 
-    Header<List<BoardEntity>> getBoardList(int page, int size, Search search) {
+    Map<String, Object> getBoardList(int page, int size, Search search) {
         HashMap<String, Object> paramMap = new HashMap<>();
 
         if (page <= 1) {    //페이지가 1 이하로 입력되면 0으로 고정,
@@ -31,44 +31,35 @@ public class BoardService {
         paramMap.put("sk", search.getSk());
         paramMap.put("sv", search.getSv());
 
-        List<BoardEntity> boardList = boardMapper.getBoardList(paramMap);
+        List<BoardDto> boardList = boardMapper.getBoardList(paramMap);
         Pagination pagination = new Pagination(
                 boardMapper.getBoardTotalCount(paramMap),
                 page,
                 size,
                 10
         );
-
-        return Header.OK(boardList, pagination);
+        
+        Map<String, Object> boardMap = new HashMap<>();
+        
+        boardMap.put("list", boardList);
+        boardMap.put("page", pagination);
+        
+        return boardMap;
     }
 
-    Header<BoardEntity> getBoardOne(Long idx) {
-        return Header.OK(boardMapper.getBoardOne(idx));
+    BoardDto getBoardOne(Long idx) {
+        return boardMapper.getBoardOne(idx);
     }
 
-    Header<BoardEntity> insertBoard(BoardSaveDto boardSaveDto) {
-        BoardEntity entity = boardSaveDto.toEntity();
-        if (boardMapper.insertBoard(entity) > 0) {
-            return Header.OK(entity);
-        } else {
-            return Header.ERROR("ERROR");
-        }
+    int insertBoard(BoardDto boardDto) {
+    	return boardMapper.insertBoard(boardDto);
     }
 
-    Header<BoardEntity> updateBoard(BoardSaveDto boardSaveDto) {
-        BoardEntity entity = boardSaveDto.toEntity();
-        if (boardMapper.updateBoard(entity) > 0) {
-            return Header.OK(entity);
-        } else {
-            return Header.ERROR("ERROR");
-        }
+    int updateBoard(BoardDto boardDto) {
+    	return boardMapper.updateBoard(boardDto);
     }
 
-    Header<String> deleteBoard(Long idx) {
-        if (boardMapper.deleteBoard(idx) > 0) {
-            return Header.OK();
-        } else {
-            return Header.ERROR("ERROR");
-        }
+    int deleteBoard(Long idx) {
+    	return boardMapper.deleteBoard(idx);
     }
 }

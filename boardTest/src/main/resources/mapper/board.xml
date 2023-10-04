@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.boardTest.db.BoardMapper">
-    <select id="getBoardList" parameterType="Map" resultType="com.example.boardTest.db.BoardEntity">
+    <select id="getBoardList" parameterType="Map" resultType="com.example.boardTest.dto.BoardDto">
         SELECT IDX
         , TITLE
         , CONTENTS
@@ -26,7 +26,7 @@
         LIMIT #{page}, #{size}
     </select>
 
-    <select id="getBoardTotalCount" parameterType="Map" resultType="Int">
+    <select id="getBoardTotalCount" parameterType="Map" resultType="int">
         SELECT COUNT(IDX)
         FROM BOARD
         WHERE 1=1
@@ -43,7 +43,7 @@
         </if>
     </select>
 
-    <select id="getBoardOne" parameterType="Long" resultType="com.example.boardTest.db.BoardEntity">
+    <select id="getBoardOne" parameterType="Long" resultType="com.example.boardTest.dto.BoardDto">
         SELECT IDX
         , TITLE
         , CONTENTS
@@ -53,7 +53,7 @@
         WHERE IDX = #{idx}
     </select>
 
-    <insert id="insertBoard" parameterType="com.example.boardTest.db.BoardEntity" keyProperty="idx" useGeneratedKeys="true">
+    <insert id="insertBoard" parameterType="com.example.boardTest.dto.BoardDto" keyProperty="idx" useGeneratedKeys="true">
         INSERT BOARD
         (
         TITLE
@@ -68,7 +68,7 @@
         )
     </insert>
 
-    <update id="updateBoard" parameterType="com.example.boardTest.db.BoardEntity">
+    <update id="updateBoard" parameterType="com.example.boardTest.dto.BoardDto">
         UPDATE BOARD
         SET TITLE = #{title}
         , CONTENTS = #{contents}
