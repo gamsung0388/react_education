@@ -51,8 +51,10 @@ public class BoardService {
         return boardMapper.getBoardOne(idx);
     }
 
-    int insertBoard(BoardDto boardDto) {
-    	return boardMapper.insertBoard(boardDto);
+    String insertBoard(BoardDto boardDto) {
+    	boardMapper.insertBoard(boardDto);
+    	    	    	
+    	return "Y";
     }
 
     int updateBoard(BoardDto boardDto) {

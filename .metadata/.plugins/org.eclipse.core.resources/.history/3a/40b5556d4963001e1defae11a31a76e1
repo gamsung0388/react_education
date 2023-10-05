@@ -1,0 +1,20 @@
+package com.example.boardTest.File;
+
+import org.springframework.stereotype.Service;
+
+import com.example.boardTest.db.FileMapper;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class FileService {
+	
+	private final FileMapper fileMapper;
+	
+	public Map<String, Object> uploadFile(HttpServletRequest request,List<MultipartFile> multipartFile){
+		
+		
+		return null;
+	}
+}

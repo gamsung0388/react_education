@@ -1,6 +1,0 @@
-package com.example.boardTest;
-
-@Data
-public class BoardEntity {
-
-}
